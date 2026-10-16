@@ -29,15 +29,21 @@ proot -r ~/lanxiu-root -0 -b /dev -b /proc -b /sys /usr/bin/bash -l
   `qystore` 应用商店、`qypkg-inst` 包安装、`qybackup` 备份、`qydisk` 磁盘、`qysearch` 搜索
 - 其他：`qybrowser` 浏览器、`qyaudio` 音量、`qyweather` 天气、`qyedit` 编辑器、`qymime` 类型、
   `qyrec` 录音、`qycolor` 取色、`qyconvert` 转换、`qyclip` 剪贴板、`qyhelp` 帮助、`qyusers` 用户等
-- 开发者工具：`git 2.49.0`（aarch64 交叉编译，含 git-core）
+- 命令行/终端工具（aarch64 交叉编译，本轮补齐）：
+  `git 2.49.0`、`iproute2`（`ip`/`ss`/`tc`）、`iw`、`alsa-utils`（`amixer`/`aplay`）、
+  `unzip`、`p7zip`（`7za`/`7z`）、`shadow`（`useradd`/`passwd`/`usermod`）、`sudo`、`tzdata`
 
 > rootfs 文件名：`lanxiu-aarch64-rootfs-20261017.tar.xz`（aarch64 仓库 Release）
 > 另有对应该 rootfs 的 **aarch64 live ISO**：`lanxiu-aarch64-1.7.41.iso`（ARM64 内核 + UEFI 启动）
 >
-> **第二轮完善**：清理了原包中混入的 x86_64 git 污染（544MB），全部 ELF 已复核为 aarch64；
-> 补齐 `qyaudio`/`qyweather`（交叉编译 alsa-lib、json-c）；新增 git 2.49.0；
-> 精简 python 测试/缓存与多余 locale，rootfs 由 1.6G 瘦身到 ~420M；
-> 已用 qemu-aarch64 + chroot 实测 bash/git/python/curl/openssl/qydesktop 可运行。
+> **完善记录**：
+> - 第二轮：清理原包 x86_64 git 污染（544MB）；补齐 `qyaudio`/`qyweather`；新增 git 2.49.0；
+>   精简 python 测试/缓存与多余 locale；全部 ELF 复核为 aarch64。
+> - 第三轮：按应用运行时依赖补齐命令行工具 —— `ip`（qynet 网络配置）、`iw`（WiFi 扫描）、
+>   `amixer`（桌面音量）、`unzip`/`7za`（文件/压缩管理器）、`useradd`/`passwd`/`sudo`（用户与提权）、
+>   `tzdata`（时区）。qemu-aarch64 + chroot 实测全部可运行。
+>
+> 📦 安卓不需要的包统计见 [docs/ANDROID-UNNEEDED.md](docs/ANDROID-UNNEEDED.md)（约 60MB 可选剔除）。
 
 ## 三条路径
 

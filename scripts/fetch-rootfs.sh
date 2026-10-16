@@ -18,7 +18,7 @@ if [ "$1" = "--lanxiu" ]; then
   DEST=${1:-$HOME/lanxiu-root}
   TARBALL=lanxiu-aarch64-rootfs-20261017.tar.xz
   mkdir -p "$DEST" && cd "$DEST"
-  echo "==> 下载 LANXIU 安卓版 rootfs（$TARBALL，约 80MB）"
+  echo "==> 下载 LANXIU 安卓版 rootfs（$TARBALL，约 88MB）"
   curl -fL --retry 5 --retry-delay 2 -C - -o "$TARBALL" "$BASE/$TARBALL"
   echo "==> 解包到 $DEST"
   tar -xJf "$TARBALL" && rm -f "$TARBALL"
