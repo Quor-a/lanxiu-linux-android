@@ -32,6 +32,7 @@ proot -r ~/lanxiu-root -0 -b /dev -b /proc -b /sys /usr/bin/bash -l
 - 未含：`qyaudio`（需 alsa）、`qyweather`（需 json-c）——aarch64 仓库暂缺这两个开发依赖
 
 > rootfs 文件名：`lanxiu-aarch64-rootfs-20261017.tar.xz`（aarch64 仓库 Release）
+> 另有对应该 rootfs 的 **aarch64 live ISO**：`lanxiu-aarch64-1.7.41.iso`（ARM64 内核 + UEFI 启动）
 
 ## 三条路径
 
@@ -114,9 +115,10 @@ python3 bin/qyandroid super --root-mb 3072
 ## 下载
 
 - **LANXIU 安卓版 rootfs（当前版，推荐）**：aarch64 仓库 Release → `lanxiu-aarch64-rootfs-20261017.tar.xz`（对应当前 ISO 1.7.41 / release 307，含 42 个当前版应用）
+- **LANXIU aarch64 live ISO（当前版）**：同 Release → `lanxiu-aarch64-1.7.41.iso`（ARM64 内核 + UEFI 启动）
 - **完整 rootfs（55+ 包）**：同 Release → `qiyuan-aarch64-rootfs-full.tar.xz`
 - **单包按需**：同 Release 的 `*.aarch64.qyp`（58 个，含 python3.13/openssl/curl/dbus 等）
-- **aarch64 live ISO**：同 Release 的 `qiyuan-aarch64-live.iso`（ARM64 内核 + UEFI 启动，qemu-system-aarch64 实测可引导至 PID 1）
+- **aarch64 live ISO（旧版）**：同 Release 的 `qiyuan-aarch64-live.iso`（ARM64 内核 + UEFI 启动，qemu-system-aarch64 实测可引导至 PID 1）
 
 ## 相关仓库
 
