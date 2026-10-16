@@ -8,7 +8,7 @@
 ## LANXIU 安卓版 rootfs（对应当前开发版）
 
 当前 x86_64 侧的 LANXIU ISO 已迭代到 **1.7.41（release 307）**。本仓库同步提供
-**LANXIU 安卓版 rootfs**：在启元 aarch64 全量包基础上，把当前版的 42 个应用
+**LANXIU 安卓版 rootfs**：在启元 aarch64 全量包基础上，把当前版的 44 个应用
 交叉编译成 aarch64 后整体打包，供 zorvAI 终端 / Termux proot 直接使用。
 
 **一键搭建（Termux）：**
@@ -27,12 +27,17 @@ proot -r ~/lanxiu-root -0 -b /dev -b /proc -b /sys /usr/bin/bash -l
 - 常用工具：`qyfiles` 文件、`qynet` 网络、`qymedia` 媒体、`qyview` 看图、`qyshot` 截图、
   `qymon` 系统监视、`qycalc` 计算器、`qyclock` 时钟、`qynote` 笔记、`qytodo` 待办、
   `qystore` 应用商店、`qypkg-inst` 包安装、`qybackup` 备份、`qydisk` 磁盘、`qysearch` 搜索
-- 其他：`qybrowser` 浏览器、`qyedit` 编辑器、`qymime` 类型、`qyrec` 录音、`qycolor` 取色、
-  `qyconvert` 转换、`qyclip` 剪贴板、`qyhelp` 帮助、`qyusers` 用户等
-- 未含：`qyaudio`（需 alsa）、`qyweather`（需 json-c）——aarch64 仓库暂缺这两个开发依赖
+- 其他：`qybrowser` 浏览器、`qyaudio` 音量、`qyweather` 天气、`qyedit` 编辑器、`qymime` 类型、
+  `qyrec` 录音、`qycolor` 取色、`qyconvert` 转换、`qyclip` 剪贴板、`qyhelp` 帮助、`qyusers` 用户等
+- 开发者工具：`git 2.49.0`（aarch64 交叉编译，含 git-core）
 
 > rootfs 文件名：`lanxiu-aarch64-rootfs-20261017.tar.xz`（aarch64 仓库 Release）
 > 另有对应该 rootfs 的 **aarch64 live ISO**：`lanxiu-aarch64-1.7.41.iso`（ARM64 内核 + UEFI 启动）
+>
+> **第二轮完善**：清理了原包中混入的 x86_64 git 污染（544MB），全部 ELF 已复核为 aarch64；
+> 补齐 `qyaudio`/`qyweather`（交叉编译 alsa-lib、json-c）；新增 git 2.49.0；
+> 精简 python 测试/缓存与多余 locale，rootfs 由 1.6G 瘦身到 ~420M；
+> 已用 qemu-aarch64 + chroot 实测 bash/git/python/curl/openssl/qydesktop 可运行。
 
 ## 三条路径
 
