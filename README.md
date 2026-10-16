@@ -5,6 +5,34 @@
 安卓与普通 ARM64 Linux 的差别不在 CPU 指令（都是 aarch64），而在**用户空间接口**：
 安卓用的是 bionic libc + 特有链接器，不是 glibc。本仓库提供三条落地路径。
 
+## LANXIU 安卓版 rootfs（对应当前开发版）
+
+当前 x86_64 侧的 LANXIU ISO 已迭代到 **1.7.41（release 307）**。本仓库同步提供
+**LANXIU 安卓版 rootfs**：在启元 aarch64 全量包基础上，把当前版的 42 个应用
+交叉编译成 aarch64 后整体打包，供 zorvAI 终端 / Termux proot 直接使用。
+
+**一键搭建（Termux）：**
+
+```sh
+pkg install proot
+curl -LO https://raw.githubusercontent.com/Quor-a/qiyuan-linux-android/main/scripts/setup-lanxiu.sh
+sh setup-lanxiu.sh
+proot -r ~/lanxiu-root -0 -b /dev -b /proc -b /sys /usr/bin/bash -l
+```
+
+内含应用（均已交叉编译为 aarch64）：
+
+- 桌面/系统：`qydesktop` 桌面、`qyappmenu` 应用菜单、`qynotifd` 通知、`qysudo` 授权、
+  `qysettings` 设置、`qysetup` 首次配置、`qylock` 锁屏、`qyswitcher` 窗口切换、`qyboot` 开机
+- 常用工具：`qyfiles` 文件、`qynet` 网络、`qymedia` 媒体、`qyview` 看图、`qyshot` 截图、
+  `qymon` 系统监视、`qycalc` 计算器、`qyclock` 时钟、`qynote` 笔记、`qytodo` 待办、
+  `qystore` 应用商店、`qypkg-inst` 包安装、`qybackup` 备份、`qydisk` 磁盘、`qysearch` 搜索
+- 其他：`qybrowser` 浏览器、`qyedit` 编辑器、`qymime` 类型、`qyrec` 录音、`qycolor` 取色、
+  `qyconvert` 转换、`qyclip` 剪贴板、`qyhelp` 帮助、`qyusers` 用户等
+- 未含：`qyaudio`（需 alsa）、`qyweather`（需 json-c）——aarch64 仓库暂缺这两个开发依赖
+
+> rootfs 文件名：`lanxiu-aarch64-rootfs-20261017.tar.xz`（aarch64 仓库 Release）
+
 ## 三条路径
 
 | 路径 | 需要 root | 原理 | 适用 |
@@ -77,14 +105,16 @@ python3 bin/qyandroid super --root-mb 3072
 
 ## 目录
 
+- `scripts/setup-lanxiu.sh` — **一键搭建 LANXIU 安卓版 proot 环境**（下载 `lanxiu-aarch64-rootfs-20261017.tar.xz`，对应当前 ISO 1.7.41 / release 307）
 - `scripts/setup-proot.sh` — 一键在 Termux 里搭好启元 proot 环境（默认下载完整 rootfs tar.xz，`--pkgs` 逐包）
 - `scripts/chroot-enter.sh` — 已 root 设备的 chroot 进入脚本
-- `scripts/fetch-rootfs.sh` — 从包仓库拉取并解包根文件系统（完整 tar.xz 或逐包 .qyp）
+- `scripts/fetch-rootfs.sh` — 从包仓库拉取并解包根文件系统（完整 tar.xz、`--lanxiu` 或逐包 .qyp）
 - `scripts/qyextract.sh` — 解包单个 .qyp（解析 QYPKG 头 + 完整性校验）
 
 ## 下载
 
-- **完整 rootfs（55+ 包，推荐）**：aarch64 仓库 Release → `qiyuan-aarch64-rootfs-full.tar.xz`
+- **LANXIU 安卓版 rootfs（当前版，推荐）**：aarch64 仓库 Release → `lanxiu-aarch64-rootfs-20261017.tar.xz`（对应当前 ISO 1.7.41 / release 307，含 42 个当前版应用）
+- **完整 rootfs（55+ 包）**：同 Release → `qiyuan-aarch64-rootfs-full.tar.xz`
 - **单包按需**：同 Release 的 `*.aarch64.qyp`（58 个，含 python3.13/openssl/curl/dbus 等）
 - **aarch64 live ISO**：同 Release 的 `qiyuan-aarch64-live.iso`（ARM64 内核 + UEFI 启动，qemu-system-aarch64 实测可引导至 PID 1）
 
