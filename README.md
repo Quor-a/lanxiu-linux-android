@@ -7,7 +7,6 @@
 
 ## LANXIU 安卓版 rootfs（对应当前开发版）
 
-当前 x86_64 侧的 LANXIU ISO 已迭代到 **1.7.41（release 307）**。本仓库同步提供
 **LANXIU 安卓版 rootfs**：在 LANXIU aarch64 全量包基础上，把当前版的 44 个应用
 交叉编译成 aarch64 后整体打包，供 zorvAI 终端 / Termux proot 直接使用。
 **联网已开箱即用**（DNS/NSS/CA 已内置，curl/wget/openssl HTTPS 实测通过）。
@@ -35,7 +34,7 @@ proot -r ~/lanxiu-root -0 -b /dev -b /proc -b /sys /usr/bin/bash -l
   `unzip`、`p7zip`（`7za`/`7z`）、`shadow`（`useradd`/`passwd`/`usermod`）、`sudo`、`tzdata`
 
 > rootfs 文件名：`lanxiu-aarch64-rootfs-20261017.tar.xz`（**本仓库 Release**，tag `lanxiu-1.7.41-aarch64`）
-> 另有对应该 rootfs 的 **aarch64 live ISO**：`lanxiu-aarch64-1.7.41.iso`（ARM64 内核 + UEFI 启动，同 Release 下载）
+
 >
 > **完善记录**：
 > - 第二轮：清理原包 x86_64 git 污染（544MB）；补齐 `qyaudio`/`qyweather`；新增 git 2.49.0；
@@ -132,7 +131,6 @@ python3 bin/qyandroid super --root-mb 3072
 
 ## 目录
 
-- `scripts/setup-lanxiu.sh` — **一键搭建 LANXIU 安卓版 proot 环境**（下载 `lanxiu-aarch64-rootfs-20261017.tar.xz`，对应当前 ISO 1.7.41 / release 307）
 - `scripts/setup-proot.sh` — 一键在 Termux 里搭好 LANXIU proot 环境（默认下载完整 rootfs tar.xz，`--pkgs` 逐包）
 - `scripts/chroot-enter.sh` — 已 root 设备的 chroot 进入脚本
 - `scripts/fetch-rootfs.sh` — 从包仓库拉取并解包根文件系统（完整 tar.xz、`--lanxiu` 或逐包 .qyp）
@@ -140,10 +138,6 @@ python3 bin/qyandroid super --root-mb 3072
 
 ## 下载
 
-> 🎯 **ISO 和 rootfs 都在本仓库 Release**：https://github.com/Quor-a/lanxiu-linux-android/releases/tag/lanxiu-1.7.41-aarch64
-
-- **LANXIU 安卓版 rootfs（当前版，推荐）**：本仓库 Release → `lanxiu-aarch64-rootfs-20261017.tar.xz`（对应当前 ISO 1.7.41 / release 307，含 44 个当前版应用 + git/命令行工具）
-- **aarch64 live ISO（QEMU 验证用）**：同 Release → `lanxiu-aarch64-1.7.41.iso`（ARM64 内核 + UEFI 引导，仅供 `qemu-system-aarch64` 验证；**安卓设备不能直接引导 ISO，实际使用 rootfs**）
 - **单包按需**：aarch64 包仓库 Release 的 `*.aarch64.qyp`（58 个，含 python3.13/openssl/curl/dbus 等）
 
 ## 相关仓库
