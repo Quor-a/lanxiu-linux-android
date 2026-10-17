@@ -48,6 +48,7 @@ proot -r ~/lanxiu-root -0 -b /dev -b /proc -b /sys /usr/bin/bash -l
 >   新增 `/etc/profile.d/ssl-ca.sh` 注入 `SSL_CERT_FILE`/`CURL_CA_BUNDLE`（curl 的 OpenSSL 后端不读目录，
 >   必须给 bundle 文件路径）。实测：`curl` 百度/GitHub 200、`wget` OK、`openssl s_client` 目录模式验证 OK。
 > - 第五轮：**全面统一品牌为 LANXIU**。`/etc/os-release`、`/etc/hostname`、`qystore.desktop` 及 weston/gtk/ld 配置全部改为 LANXIU，源码/文档同步清理。
+> - 第六轮：**sudo 修复可用**。补齐 `/etc/pam.d/`（sudo/su/login/passwd/other）与 `/etc/shadow`，chroot 下 `sudo -n id` 实测正常；`qyinit` 启动横幅同步改为澜岫 Linux。
 >
 > 📦 安卓不需要的包统计见 [docs/ANDROID-UNNEEDED.md](docs/ANDROID-UNNEEDED.md)（约 60MB 可选剔除）。
 
@@ -61,6 +62,11 @@ proot -r ~/lanxiu-root -0 -b /dev -b /proc -b /sys /usr/bin/bash -l
 
 三条路共用同一套 **aarch64 .qyp 包**：
 https://github.com/Quor-a/lanxiu-linux-aarch64
+
+## 已知限制
+
+- **嵌套 proot 无法再启动第二个 rootfs**：安卓的 ptrace 安全策略会拒绝嵌套 proot，所以 LANXIU 不能在现有 Ubuntu proot 环境里再套一层运行，目前只能作为文件独立存在，或等 App 内的发行版切换器支持后直接切换。
+- **sudo 已可用**：rootfs 内置完整 PAM 配置（`/etc/pam.d/`）和 `/etc/shadow`，chroot 下 `sudo -n id` 实测正常。已 root 设备建议走 chroot 路径；proot 下直接 `proot -0` 以 root 身份操作即可。
 
 ## 快速开始（路径 A：proot，无需 root）
 
