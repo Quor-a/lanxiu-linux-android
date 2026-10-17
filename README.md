@@ -145,3 +145,9 @@ python3 bin/qyandroid super --root-mb 3072
 - 主仓库（配方 + 源码 + 工具链）：https://github.com/Quor-a/lanxiu-linux
 - aarch64 包仓库：https://github.com/Quor-a/lanxiu-linux-aarch64
 - x86_64 包仓库：https://github.com/Quor-a/lanxiu-linux-pkgs
+
+
+## 下载
+
+- **proot Root 用户空间数据 ISO**：本仓库 Release → （挂载后  使用）
+- **r10 rootfs（推荐）**：本仓库 Release → 
