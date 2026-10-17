@@ -138,15 +138,6 @@ python3 bin/qyandroid super --root-mb 3072
 
 ## 下载
 
+- **proot Root 用户空间数据 ISO**：本仓库 Release → `lanxiu-aarch64-1.7.41.iso`（挂载后 `proot -0 -r <解压目录> /bin/bash` 使用）
+- **r10 rootfs（推荐）**：本仓库 Release → `lanxiu-aarch64-rootfs-20261017.tar.xz`（直接解压后 `proot -0 -r <目录> /bin/bash` 运行）
 - **单包按需**：aarch64 包仓库 Release 的 `*.aarch64.qyp`（58 个，含 python3.13/openssl/curl/dbus 等）
-
-## 相关仓库
-
-- 主仓库（配方 + 源码 + 工具链）：https://github.com/Quor-a/lanxiu-linux
-- aarch64 包仓库：https://github.com/Quor-a/lanxiu-linux-aarch64
-- x86_64 包仓库：https://github.com/Quor-a/lanxiu-linux-pkgs
-
-## 下载
-
-- **proot Root 用户空间数据 ISO**：本仓库 Release → （挂载后  使用）
-- **r10 rootfs（推荐）**：本仓库 Release → 
