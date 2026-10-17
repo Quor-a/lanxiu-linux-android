@@ -10,6 +10,7 @@
 当前 x86_64 侧的 LANXIU ISO 已迭代到 **1.7.41（release 307）**。本仓库同步提供
 **LANXIU 安卓版 rootfs**：在启元 aarch64 全量包基础上，把当前版的 44 个应用
 交叉编译成 aarch64 后整体打包，供 zorvAI 终端 / Termux proot 直接使用。
+**联网已开箱即用**（DNS/NSS/CA 已内置，curl/wget/openssl HTTPS 实测通过）。
 
 **一键搭建（Termux）：**
 
@@ -42,6 +43,10 @@ proot -r ~/lanxiu-root -0 -b /dev -b /proc -b /sys /usr/bin/bash -l
 > - 第三轮：按应用运行时依赖补齐命令行工具 —— `ip`（qynet 网络配置）、`iw`（WiFi 扫描）、
 >   `amixer`（桌面音量）、`unzip`/`7za`（文件/压缩管理器）、`useradd`/`passwd`/`sudo`（用户与提权）、
 >   `tzdata`（时区）。qemu-aarch64 + chroot 实测全部可运行。
+> - 第四轮：**联网开箱即用**。补齐 `/etc/resolv.conf`（6 个 DNS）、`/etc/nsswitch.conf`（`hosts: files dns`）、
+>   `/etc/ssl/certs` CA 证书（121 张 + rehash 哈希链接 + `ca-certificates.crt` bundle）；
+>   新增 `/etc/profile.d/ssl-ca.sh` 注入 `SSL_CERT_FILE`/`CURL_CA_BUNDLE`（curl 的 OpenSSL 后端不读目录，
+>   必须给 bundle 文件路径）。实测：`curl` 百度/GitHub 200、`wget` OK、`openssl s_client` 目录模式验证 OK。
 >
 > 📦 安卓不需要的包统计见 [docs/ANDROID-UNNEEDED.md](docs/ANDROID-UNNEEDED.md)（约 60MB 可选剔除）。
 
