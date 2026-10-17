@@ -50,6 +50,7 @@ proot -r ~/lanxiu-root -0 -b /dev -b /proc -b /sys /usr/bin/bash -l
 > - 第五轮：**全面统一品牌为 LANXIU**。`/etc/os-release`、`/etc/hostname`、`qystore.desktop` 及 weston/gtk/ld 配置全部改为 LANXIU，源码/文档同步清理。
 > - 第六轮：**sudo 修复可用**。补齐 `/etc/pam.d/`（sudo/su/login/passwd/other）与 `/etc/shadow`，chroot 下 `sudo -n id` 实测正常；`qyinit` 启动横幅同步改为澜岫 Linux。
 > - 第七轮：**proot cwd 兼容修复**。rootfs 预建 `/data/user/0/...`、`/data/local/tmp`、`/storage/emulated/0`、`/sdcard` 等安卓宿主路径（guest 内可见、权限兼容普通 uid），proot 继承宿主 cwd 启动时 `getcwd` 不再失败。
+> - 第八轮：**对齐 Ubuntu proot 用户空间**。以官方 Ubuntu Base 24.04.5 arm64 为基准逐项对比（见 [docs/UBUNTU-PROOT-COMPARE.md](docs/UBUNTU-PROOT-COMPARE.md)），补齐 `/etc/ld.so.cache`（334 库）、`/sbin/ldconfig`、`/etc/machine-id`（dbus 必需）、`/etc/bash.bashrc`、`/root/.bashrc`、`/etc/login.defs`、`/etc/issue`、`/etc/host.conf`、`/etc/gai.conf`、`getent`/`ldd`/`getconf` 等。
 >
 > 📦 安卓不需要的包统计见 [docs/ANDROID-UNNEEDED.md](docs/ANDROID-UNNEEDED.md)（约 60MB 可选剔除）。
 
