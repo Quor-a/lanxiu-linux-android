@@ -1,6 +1,6 @@
-# 启元 Linux · 安卓移植层
+# LANXIU Linux · 安卓移植层
 
-把**启元 Linux**（Quor-a/qiyuan-linux）的 aarch64 用户空间搬到安卓设备上运行。
+把**LANXIU Linux**（Quor-a/lanxiu-linux）的 aarch64 用户空间搬到安卓设备上运行。
 
 安卓与普通 ARM64 Linux 的差别不在 CPU 指令（都是 aarch64），而在**用户空间接口**：
 安卓用的是 bionic libc + 特有链接器，不是 glibc。本仓库提供三条落地路径。
@@ -8,7 +8,7 @@
 ## LANXIU 安卓版 rootfs（对应当前开发版）
 
 当前 x86_64 侧的 LANXIU ISO 已迭代到 **1.7.41（release 307）**。本仓库同步提供
-**LANXIU 安卓版 rootfs**：在启元 aarch64 全量包基础上，把当前版的 44 个应用
+**LANXIU 安卓版 rootfs**：在 LANXIU aarch64 全量包基础上，把当前版的 44 个应用
 交叉编译成 aarch64 后整体打包，供 zorvAI 终端 / Termux proot 直接使用。
 **联网已开箱即用**（DNS/NSS/CA 已内置，curl/wget/openssl HTTPS 实测通过）。
 
@@ -16,7 +16,7 @@
 
 ```sh
 pkg install proot
-curl -LO https://raw.githubusercontent.com/Quor-a/qiyuan-linux-android/main/scripts/setup-lanxiu.sh
+curl -LO https://raw.githubusercontent.com/Quor-a/lanxiu-linux-android/main/scripts/setup-lanxiu.sh
 sh setup-lanxiu.sh
 proot -r ~/lanxiu-root -0 -b /dev -b /proc -b /sys /usr/bin/bash -l
 ```
@@ -47,6 +47,8 @@ proot -r ~/lanxiu-root -0 -b /dev -b /proc -b /sys /usr/bin/bash -l
 >   `/etc/ssl/certs` CA 证书（121 张 + rehash 哈希链接 + `ca-certificates.crt` bundle）；
 >   新增 `/etc/profile.d/ssl-ca.sh` 注入 `SSL_CERT_FILE`/`CURL_CA_BUNDLE`（curl 的 OpenSSL 后端不读目录，
 >   必须给 bundle 文件路径）。实测：`curl` 百度/GitHub 200、`wget` OK、`openssl s_client` 目录模式验证 OK。
+> - 第五轮：**全面去除旧品牌「启元/Qiyuan」**。`/etc/os-release`（原 Qiyuan Linux 0.2.0 → LANXIU Linux 1.7.41）、
+>   `/etc/hostname`（qiyuan → lanxiu）、`qystore.desktop`（Qiyuan Store → LANXIU Store）、weston/gtk/ld 配置注释与文件名同步更新。
 >
 > 📦 安卓不需要的包统计见 [docs/ANDROID-UNNEEDED.md](docs/ANDROID-UNNEEDED.md)（约 60MB 可选剔除）。
 
@@ -56,10 +58,10 @@ proot -r ~/lanxiu-root -0 -b /dev -b /proc -b /sys /usr/bin/bash -l
 |---|---|---|---|
 | **A. proot** | 否 | ptrace 拦截系统调用，把路径重定向到目录 | 普通手机、快速试用 |
 | **B. chroot** | 是 | 直接切根，性能最好 | 已 root 设备、开发板 |
-| **C. 原生启动** | 是 | 刷 boot.img 启动启元内核 | 深度定制设备 |
+| **C. 原生启动** | 是 | 刷 boot.img 启动 LANXIU 内核 | 深度定制设备 |
 
 三条路共用同一套 **aarch64 .qyp 包**：
-https://github.com/Quor-a/qiyuan-linux-aarch64
+https://github.com/Quor-a/lanxiu-linux-aarch64
 
 ## 快速开始（路径 A：proot，无需 root）
 
@@ -68,17 +70,17 @@ https://github.com/Quor-a/qiyuan-linux-aarch64
 pkg install proot
 
 # 2. 一键拉取并解包完整基础环境（glibc + busybox + bash + 常用工具，约 20 包）
-curl -LO https://raw.githubusercontent.com/Quor-a/qiyuan-linux-android/main/scripts/setup-proot.sh
+curl -LO https://raw.githubusercontent.com/Quor-a/lanxiu-linux-android/main/scripts/setup-proot.sh
 sh setup-proot.sh
 
 # 或分步：下载包后用 qyextract.sh 解包（.qyp = 128 字节头 + gzip tar 数据段）
 # sh qyextract.sh <包.qyp> [目标目录]
 
-# 3. 进入启元环境
+# 3. 进入 LANXIU 环境
 proot -r ~/qyroot -0 -b /dev -b /proc -b /sys /usr/bin/bash
 ```
 
-进入后即是启元 Linux 的 aarch64 用户空间：glibc 运行时 + bash/grep/sed/tar 等。
+进入后即是 LANXIU Linux 的 aarch64 用户空间：glibc 运行时 + bash/grep/sed/tar 等。
 注意：**glibc 包必须最先解包**（其余动态链接包都依赖它）。
 
 ## 路径 B：chroot（已 root）
@@ -123,22 +125,22 @@ python3 bin/qyandroid super --root-mb 3072
 ## 目录
 
 - `scripts/setup-lanxiu.sh` — **一键搭建 LANXIU 安卓版 proot 环境**（下载 `lanxiu-aarch64-rootfs-20261017.tar.xz`，对应当前 ISO 1.7.41 / release 307）
-- `scripts/setup-proot.sh` — 一键在 Termux 里搭好启元 proot 环境（默认下载完整 rootfs tar.xz，`--pkgs` 逐包）
+- `scripts/setup-proot.sh` — 一键在 Termux 里搭好 LANXIU proot 环境（默认下载完整 rootfs tar.xz，`--pkgs` 逐包）
 - `scripts/chroot-enter.sh` — 已 root 设备的 chroot 进入脚本
 - `scripts/fetch-rootfs.sh` — 从包仓库拉取并解包根文件系统（完整 tar.xz、`--lanxiu` 或逐包 .qyp）
 - `scripts/qyextract.sh` — 解包单个 .qyp（解析 QYPKG 头 + 完整性校验）
 
 ## 下载
 
-> 🎯 **ISO 和 rootfs 都在本仓库 Release**：https://github.com/Quor-a/qiyuan-linux-android/releases/tag/lanxiu-1.7.41-aarch64
+> 🎯 **ISO 和 rootfs 都在本仓库 Release**：https://github.com/Quor-a/lanxiu-linux-android/releases/tag/lanxiu-1.7.41-aarch64
 
 - **LANXIU 安卓版 rootfs（当前版，推荐）**：本仓库 Release → `lanxiu-aarch64-rootfs-20261017.tar.xz`（对应当前 ISO 1.7.41 / release 307，含 44 个当前版应用 + git/命令行工具）
 - **LANXIU aarch64 live ISO（当前版）**：同 Release → `lanxiu-aarch64-1.7.41.iso`（ARM64 内核 + UEFI 启动）
-- **完整 rootfs（55+ 包）**：aarch64 包仓库 Release → `qiyuan-aarch64-rootfs-full.tar.xz`
+- **完整 rootfs（55+ 包）**：aarch64 包仓库 Release → `lanxiu-aarch64-rootfs-full.tar.xz`
 - **单包按需**：aarch64 包仓库 Release 的 `*.aarch64.qyp`（58 个，含 python3.13/openssl/curl/dbus 等）
 
 ## 相关仓库
 
-- 主仓库（配方 + 源码 + 工具链）：https://github.com/Quor-a/qiyuan-linux
-- aarch64 包仓库：https://github.com/Quor-a/qiyuan-linux-aarch64
-- x86_64 包仓库：https://github.com/Quor-a/qiyuan-linux-pkgs
+- 主仓库（配方 + 源码 + 工具链）：https://github.com/Quor-a/lanxiu-linux
+- aarch64 包仓库：https://github.com/Quor-a/lanxiu-linux-aarch64
+- x86_64 包仓库：https://github.com/Quor-a/lanxiu-linux-pkgs

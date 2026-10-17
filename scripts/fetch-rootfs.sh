@@ -1,5 +1,5 @@
 #!/bin/sh
-# 获取启元 aarch64 根文件系统
+# 获取 LANXIU aarch64 根文件系统
 #
 # 默认：直接下载组装好的完整 rootfs（55+ 包，已验证可直接用）——推荐。
 # 加 --lanxiu：下载「LANXIU 安卓版」完整 rootfs（对应当前 x86_64 ISO 1.7.41 / release 307，
@@ -10,7 +10,7 @@
 #       ./fetch-rootfs.sh --lanxiu [目标目录]
 #       ./fetch-rootfs.sh --pkgs [目标目录] [包名...]
 set -e
-BASE=https://github.com/Quor-a/qiyuan-linux-aarch64/releases/latest/download
+BASE=https://github.com/Quor-a/lanxiu-linux-aarch64/releases/latest/download
 DIR=$(cd "$(dirname "$0")" && pwd)
 
 if [ "$1" = "--lanxiu" ]; then
@@ -37,7 +37,7 @@ elif [ "$1" = "--pkgs" ]; then
   done
 else
   DEST=${1:-$HOME/qyroot}
-  TARBALL=qiyuan-aarch64-rootfs-20261010.tar.xz
+  TARBALL=lanxiu-aarch64-rootfs-20261010.tar.xz
   mkdir -p "$DEST" && cd "$DEST"
   echo "==> 下载完整 rootfs（约 24MB）"
   curl -fL --retry 5 --retry-delay 2 -C - -o "$TARBALL" "$BASE/$TARBALL"

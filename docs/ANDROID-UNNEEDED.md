@@ -1,6 +1,6 @@
 # 安卓（proot/chroot）不需要的包统计
 
-> 统计基于 `Quor-a/qiyuan-linux-aarch64` Release 的 `index.json`（117 个包）。
+> 统计基于 `Quor-a/lanxiu-linux-aarch64` Release 的 `index.json`（117 个包）。
 > 判定标准：LANXIU 安卓版走 **proot/chroot** 落地，不使用原生显示服务器/内核引导，
 > 因此以下包在安卓场景下用不到。移除可再瘦身约 **60MB**。
 
@@ -16,7 +16,7 @@
 | `libevdev` | 126KB | 输入事件设备封装库。仅原生显示服务器需要 |
 | `seatd` | 80KB | seat/会话管理守护进程。weston 依赖 |
 | `mtdev` | 22KB | 多点触控协议转换库。仅原生显示服务器需要 |
-| `libqydemo` | 4KB | 启元演示共享库。qydesktop 不依赖它 |
+| `libqydemo` | 4KB | LANXIU 演示共享库。qydesktop 不依赖它 |
 
 ## 二、头文件包（运行时不需要，13 个，约 1MB）
 
@@ -43,7 +43,7 @@
 ## 生成方式
 
 ```sh
-curl -L -o index.json https://github.com/Quor-a/qiyuan-linux-aarch64/releases/download/latest/index.json
+curl -L -o index.json https://github.com/Quor-a/lanxiu-linux-aarch64/releases/download/latest/index.json
 python3 - <<'PY'
 import json
 d=json.load(open('index.json'))

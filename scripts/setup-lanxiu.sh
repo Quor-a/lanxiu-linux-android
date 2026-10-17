@@ -1,5 +1,5 @@
 #!/bin/sh
-# 一键在 Termux / 安卓设备上搭建 LANXIU（启元 Linux）aarch64 proot 环境
+# 一键在 Termux / 安卓设备上搭建 LANXIU Linuxaarch64 proot 环境
 #
 # 拉取对应当前 x86_64 LANXIU ISO 1.7.41（release 307）的「LANXIU 安卓版」完整 rootfs：
 #   lanxiu-aarch64-rootfs-20261017.tar.xz
@@ -11,7 +11,7 @@
 # 用法: sh setup-lanxiu.sh [目标目录]
 # 默认目录: ~/lanxiu-root
 set -e
-BASE=https://github.com/Quor-a/qiyuan-linux-aarch64/releases/latest/download
+BASE=https://github.com/Quor-a/lanxiu-linux-aarch64/releases/latest/download
 DEST=${1:-$HOME/lanxiu-root}
 TARBALL=lanxiu-aarch64-rootfs-20261017.tar.xz
 

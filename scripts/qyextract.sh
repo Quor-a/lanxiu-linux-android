@@ -1,5 +1,5 @@
 #!/bin/sh
-# 解包启元 .qyp 包（安卓/Termux 环境，仅依赖 busybox 的 od/tail/tar）
+# 解包 LANXIU .qyp 包（安卓/Termux 环境，仅依赖 busybox 的 od/tail/tar）
 #
 # .qyp 不是普通 tar 容器：文件头 128 字节（"QYPKG" 魔数 + 元数据偏移表），
 # 数据段从 data_off 开始，是 **gzip 压缩的 tar**（不是 zstd）。

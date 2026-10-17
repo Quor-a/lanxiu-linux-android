@@ -1,5 +1,5 @@
 #!/data/data/com.termux/files/usr/bin/sh
-# Termux 一键搭启元 proot 环境
+# Termux 一键搭 LANXIU proot 环境
 #
 # 默认：下载组装好的完整 rootfs（35+ 包，17 项启动自检全过）——推荐，
 #       一个 24MB 的 tar.xz 一次搞定，无需逐包下载。
