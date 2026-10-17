@@ -33,8 +33,8 @@ proot -r ~/lanxiu-root -0 -b /dev -b /proc -b /sys /usr/bin/bash -l
   `git 2.49.0`、`iproute2`（`ip`/`ss`/`tc`）、`iw`、`alsa-utils`（`amixer`/`aplay`）、
   `unzip`、`p7zip`（`7za`/`7z`）、`shadow`（`useradd`/`passwd`/`usermod`）、`sudo`、`tzdata`
 
-> rootfs 文件名：`lanxiu-aarch64-rootfs-20261017.tar.xz`（aarch64 仓库 Release）
-> 另有对应该 rootfs 的 **aarch64 live ISO**：`lanxiu-aarch64-1.7.41.iso`（ARM64 内核 + UEFI 启动）
+> rootfs 文件名：`lanxiu-aarch64-rootfs-20261017.tar.xz`（**本仓库 Release**，tag `lanxiu-1.7.41-aarch64`）
+> 另有对应该 rootfs 的 **aarch64 live ISO**：`lanxiu-aarch64-1.7.41.iso`（ARM64 内核 + UEFI 启动，同 Release 下载）
 >
 > **完善记录**：
 > - 第二轮：清理原包 x86_64 git 污染（544MB）；补齐 `qyaudio`/`qyweather`；新增 git 2.49.0；
@@ -125,11 +125,12 @@ python3 bin/qyandroid super --root-mb 3072
 
 ## 下载
 
-- **LANXIU 安卓版 rootfs（当前版，推荐）**：aarch64 仓库 Release → `lanxiu-aarch64-rootfs-20261017.tar.xz`（对应当前 ISO 1.7.41 / release 307，含 42 个当前版应用）
+> 🎯 **ISO 和 rootfs 都在本仓库 Release**：https://github.com/Quor-a/qiyuan-linux-android/releases/tag/lanxiu-1.7.41-aarch64
+
+- **LANXIU 安卓版 rootfs（当前版，推荐）**：本仓库 Release → `lanxiu-aarch64-rootfs-20261017.tar.xz`（对应当前 ISO 1.7.41 / release 307，含 44 个当前版应用 + git/命令行工具）
 - **LANXIU aarch64 live ISO（当前版）**：同 Release → `lanxiu-aarch64-1.7.41.iso`（ARM64 内核 + UEFI 启动）
-- **完整 rootfs（55+ 包）**：同 Release → `qiyuan-aarch64-rootfs-full.tar.xz`
-- **单包按需**：同 Release 的 `*.aarch64.qyp`（58 个，含 python3.13/openssl/curl/dbus 等）
-- **aarch64 live ISO（旧版）**：同 Release 的 `qiyuan-aarch64-live.iso`（ARM64 内核 + UEFI 启动，qemu-system-aarch64 实测可引导至 PID 1）
+- **完整 rootfs（55+ 包）**：aarch64 包仓库 Release → `qiyuan-aarch64-rootfs-full.tar.xz`
+- **单包按需**：aarch64 包仓库 Release 的 `*.aarch64.qyp`（58 个，含 python3.13/openssl/curl/dbus 等）
 
 ## 相关仓库
 
