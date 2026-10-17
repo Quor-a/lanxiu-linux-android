@@ -3,7 +3,7 @@
 #
 # 拉取对应当前 x86_64 LANXIU ISO 1.7.41（release 307）的「LANXIU 安卓版」完整 rootfs：
 #   lanxiu-aarch64-rootfs-20261017.tar.xz
-# 该 rootfs 在启元 aarch64 全量包基础上，已加入 42 个交叉编译到 aarch64 的当前版应用
+# 该 rootfs 在 LANXIU aarch64 全量包基础上，已加入 44 个交叉编译到 aarch64 的当前版应用
 # （qydesktop 桌面 / qyfiles 文件 / qymedia 媒体 / qynet 网络 / qysettings 设置 /
 #   qycalc 计算器 / qyclock 时钟 / qynote 笔记 / qyshot 截图 / qymon 监视 /
 #   qystore 商店 / qyview 看图 / qysudo 授权 / qynotifd 通知 等）。
