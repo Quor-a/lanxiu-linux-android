@@ -37,9 +37,9 @@ elif [ "$1" = "--pkgs" ]; then
   done
 else
   DEST=${1:-$HOME/qyroot}
-  TARBALL=lanxiu-aarch64-rootfs-20261010.tar.xz
+  TARBALL=lanxiu-aarch64-rootfs-20261017.tar.xz
   mkdir -p "$DEST" && cd "$DEST"
-  echo "==> 下载完整 rootfs（约 24MB）"
+  echo "==> 下载完整 rootfs（r9，约 93MB）"
   curl -fL --retry 5 --retry-delay 2 -C - -o "$TARBALL" "$BASE/$TARBALL"
   echo "==> 解包到 $DEST"
   tar -xJf "$TARBALL" && rm -f "$TARBALL"

@@ -143,8 +143,7 @@ python3 bin/qyandroid super --root-mb 3072
 > 🎯 **ISO 和 rootfs 都在本仓库 Release**：https://github.com/Quor-a/lanxiu-linux-android/releases/tag/lanxiu-1.7.41-aarch64
 
 - **LANXIU 安卓版 rootfs（当前版，推荐）**：本仓库 Release → `lanxiu-aarch64-rootfs-20261017.tar.xz`（对应当前 ISO 1.7.41 / release 307，含 44 个当前版应用 + git/命令行工具）
-- **LANXIU aarch64 live ISO（当前版）**：同 Release → `lanxiu-aarch64-1.7.41.iso`（ARM64 内核 + UEFI 启动）
-- **完整 rootfs（55+ 包）**：aarch64 包仓库 Release → `lanxiu-aarch64-rootfs-full.tar.xz`
+- **aarch64 live ISO（QEMU 验证用）**：同 Release → `lanxiu-aarch64-1.7.41.iso`（ARM64 内核 + UEFI 引导，仅供 `qemu-system-aarch64` 验证；**安卓设备不能直接引导 ISO，实际使用 rootfs**）
 - **单包按需**：aarch64 包仓库 Release 的 `*.aarch64.qyp`（58 个，含 python3.13/openssl/curl/dbus 等）
 
 ## 相关仓库
