@@ -5,6 +5,23 @@
 安卓与普通 ARM64 Linux 的差别不在 CPU 指令（都是 aarch64），而在**用户空间接口**：
 安卓用的是 bionic libc + 特有链接器，不是 glibc。本仓库提供三条落地路径。
 
+## 内置 LANXIU 的 OperitTerminal APK（真机 proot 验证）
+
+`lanxiu-aarch64-1.7.41-operit.apk`（本仓库 Release，tag `lanxiu-1.7.41-aarch64`）：
+基于 **OperitTerminal**（github.com/AAswordman/OperitTerminal）构建，应用名 **LANXIU**，
+内置 r10 rootfs（首启自动解压），bionic proot 以 `proot -0` 进入 LANXIU 用户空间。
+
+本包做了两处关键修复，可在**安卓真机**（即使 `/data/user/0` 为 noexec）直接运行：
+
+- **noexec 修复**：rootfs 与运行数据放到 `device-protected storage`（`/data/user_de/0/...`），
+  规避现代 Android 对 `/data/user/0` 的 noexec 限制；
+- **proot 可执行修复**：沿用项目自带的 bionic 静态 talloc proot（仅依赖 `libc/libdl`），
+  不会被安卓 seccomp 以 SIGSYS 杀掉。
+
+安装后打开即进入 LANXIU bash 终端（root 用户，`proot -0`），
+可执行 `cat /etc/lanxiu-release`、`sudo`、`apt`/`qypkg` 等验证。
+对应可复现构建源码：`operit-lanxiu-src.tar.xz`（同 Release）。
+
 ## LANXIU 安卓版 rootfs（对应当前开发版）
 
 **LANXIU 安卓版 rootfs**：在 LANXIU aarch64 全量包基础上，把当前版的 44 个应用
