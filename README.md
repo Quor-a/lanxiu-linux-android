@@ -57,7 +57,14 @@ proot -r ~/lanxiu-root -0 -b /dev -b /proc -b /sys /usr/bin/bash -l
 > - **服务管理**：`qysvc start|stop|restart|status|list`（setsid 守护 + pidfile + 日志），`qyinit` 监督 `sshd.unit`（`Restart=on-failure` 自动拉起）；
 > - 默认 SSH：`ssh root@<ip>`，密码 `lanxiu`；`/etc/ssh/sshd_config` 已配 `PermitRootLogin yes`、`UsePAM no`。
 >
-> **r13 完整开发工具版（推荐）**：`lanxiu-aarch64-rootfs-20261018-r13.tar.xz`（**新 Release，tag `lanxiu-1.7.42-aarch64`**）
+> **r14 GUI 环境补齐版（推荐）**：`lanxiu-aarch64-rootfs-20261018-r14.tar.xz`（**新 Release，tag `lanxiu-1.7.43-aarch64`**）
+> - **修复 `/bin/busybox` 缺失**：LANXIU 启动脚本依赖 `/bin/busybox`，原 rootfs 只建了 applet 符号链接漏了本体，导致 start-weston.sh 静默失败；已补
+> - **补 gdk-pixbuf loaders + 生成 loaders.cache**：GTK 图像加载（PNG/JPEG 内置 + bmp/gif/ico/tga/xpm 等 11 个模块）
+> - **补桌面壁纸** `/usr/share/backgrounds/lanxiu.png`（1280x800）、**补 Adwaita dnd 光标**、设置 XCURSOR_PATH/XCURSOR_THEME
+> - **补 C.UTF-8 locale 数据**（消除 "Locale not supported" 警告）、**修 x86_64 残留路径**（GIO_MODULE_DIR/GDK_PIXBUF_MODULE_FILE/LD_LIBRARY_PATH 改为 aarch64 实际路径）
+> - **实测**：qemu headless 下 seatd → weston 14.0.2（1280x800）→ wayland-1 → qydesktop 常驻（拉起 qywelcome），壁纸/光标/locale 零报错
+>
+> **r13 完整开发工具版**：`lanxiu-aarch64-rootfs-20261018-r13.tar.xz`（tag `lanxiu-1.7.42-aarch64`）
 > - **Go 1.22.12**（官方 aarch64，`/usr/local/go/bin/go`、`gofmt`），实测 `go build` + 运行通过；
 > - **Rust 1.99.1**（官方 aarch64，`rustc`/`cargo`/`rustfmt`/`clippy`/`rust-analyzer` 在 `/var/cargo/bin`），已配置 `rust-lld` 链接器 + `/usr/lib` crt（`/etc/profile.d/devtools.sh` 和 `/var/cargo/config.toml`），实测 `cargo new` + `cargo build --offline` + 运行通过；
 > - **git 2.49.0** + node 22.14.0 + Python 3.13 + zsh/fish/dash + sudo 修复 + 内置静态 proot；
