@@ -57,7 +57,13 @@ proot -r ~/lanxiu-root -0 -b /dev -b /proc -b /sys /usr/bin/bash -l
 > - **服务管理**：`qysvc start|stop|restart|status|list`（setsid 守护 + pidfile + 日志），`qyinit` 监督 `sshd.unit`（`Restart=on-failure` 自动拉起）；
 > - 默认 SSH：`ssh root@<ip>`，密码 `lanxiu`；`/etc/ssh/sshd_config` 已配 `PermitRootLogin yes`、`UsePAM no`。
 >
-> **r14 GUI 环境补齐版（推荐）**：`lanxiu-aarch64-rootfs-20261018-r14.tar.xz`（**新 Release，tag `lanxiu-1.7.43-aarch64`**），同版本 ISO：`lanxiu-aarch64-1.7.43.iso`
+> **r15 缺失组件补齐版（推荐）**：`lanxiu-aarch64-rootfs-20261019-r15.tar.xz`（**新 Release，tag `lanxiu-1.7.44-aarch64`**），同版本 ISO：`lanxiu-aarch64-1.7.44.iso`
+> - **tmux 3.4**（实测可用）、**wl-clipboard 2.2.1**（wl-copy/wl-paste，实测可用）
+> - **locale 命令 + locale-gen + localedef**（libc-bin/locales），**中文 locale zh_CN.UTF-8**（实测 `LANG=zh_CN.UTF-8` 生效）
+> - **自动登录 `/etc/qyautologin`**（root）
+> - **fcitx5 5.1.7 + 拼音**完整安装 + 默认拼音配置 + GTK IM 模块 + 独立完整 cairo（候选框可用）；因 LANXIU GTK 为 wayland-only 裁剪版且 weston 无 input-method 协议，GTK 前端暂无法挂接，已从桌面自启移除防崩溃，保留安装待上游支持
+>
+> **r14 GUI 环境补齐版**：`lanxiu-aarch64-rootfs-20261018-r14.tar.xz`（tag `lanxiu-1.7.43-aarch64`）
 > - **修复 `/bin/busybox` 缺失**：LANXIU 启动脚本依赖 `/bin/busybox`，原 rootfs 只建了 applet 符号链接漏了本体，导致 start-weston.sh 静默失败；已补
 > - **补 gdk-pixbuf loaders + 生成 loaders.cache**：GTK 图像加载（PNG/JPEG 内置 + bmp/gif/ico/tga/xpm 等 11 个模块）
 > - **补桌面壁纸** `/usr/share/backgrounds/lanxiu.png`（1280x800）、**补 Adwaita dnd 光标**、设置 XCURSOR_PATH/XCURSOR_THEME
