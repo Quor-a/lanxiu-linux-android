@@ -140,7 +140,7 @@ python3 bin/qyandroid super --root-mb 3072
 
 - **`lanxiu-aarch64-1.7.41.apk`**（约 95MB）：可直接安装的测试 APK，内置：
   - aarch64 静态 proot 二进制
-  - r10 LANXIU rootfs（93MB xz，首次启动自动解压（v2：proot 置于 nativeLibraryDir 执行，rootfs 解压到 device-protected storage，修复 noexec 导致 Permission denied））
+  - r10 LANXIU rootfs（93MB xz，首次启动自动解压（v3：改用 bionic 编译的 proot（Termux 版），内置 libtalloc.so.2/libandroid-shmem.so，设置 LD_LIBRARY_PATH，修复 glibc 静态版被安卓 seccomp 杀(SIGSYS)的问题））
   - 启动后自动以 `proot -0 -r <rootfs> /bin/bash` 运行，显示 id/uname/os-release
 - 包名：`com.lanxiu.android`；minSdk 24 / targetSdk 34；仅支持 arm64-v8a 设备
 - 用途：验证 LANXIU rootfs 在真实安卓设备 proot 环境下的行为（定位原 App 的 proot bug 是否为 App 侧问题）
