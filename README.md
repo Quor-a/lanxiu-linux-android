@@ -50,8 +50,12 @@ proot -r ~/lanxiu-root -0 -b /dev -b /proc -b /sys /usr/bin/bash -l
   `git 2.49.0`、`iproute2`（`ip`/`ss`/`tc`）、`iw`、`alsa-utils`（`amixer`/`aplay`）、
   `unzip`、`p7zip`（`7za`/`7z`）、`shadow`（`useradd`/`passwd`/`usermod`）、`sudo`、`tzdata`
 
-> rootfs 文件名：`lanxiu-aarch64-rootfs-20261017.tar.xz`（**本仓库 Release**，tag `lanxiu-1.7.41-aarch64`）
-
+> rootfs 文件名：`lanxiu-aarch64-rootfs-20261017.tar.xz`（r10，**本仓库 Release**，tag `lanxiu-1.7.41-aarch64`）
+> **r11 服务器增强版**：`lanxiu-aarch64-rootfs-20261018-r11.tar.xz`（推荐）—— 把 LANXIU 变成轻量服务器：
+> - **node**：官方 arm64 构建 v22.14.0（`/usr/local/bin/node`、`npm`、`npx`），实测 node 服务监听 + curl 访问；
+> - **sshd**：Ubuntu noble OpenSSH 9.6p1 全套（`sshd`/`ssh`/`ssh-keygen`/`sftp-server` 及全部依赖库），实测密钥登录 + `root`/`lanxiu` 密码登录；
+> - **服务管理**：`qysvc start|stop|restart|status|list`（setsid 守护 + pidfile + 日志），`qyinit` 监督 `sshd.unit`（`Restart=on-failure` 自动拉起）；
+> - 默认 SSH：`ssh root@<ip>`，密码 `lanxiu`；`/etc/ssh/sshd_config` 已配 `PermitRootLogin yes`、`UsePAM no`。
 >
 > **完善记录**：
 > - 第二轮：清理原包 x86_64 git 污染（544MB）；补齐 `qyaudio`/`qyweather`；新增 git 2.49.0；
