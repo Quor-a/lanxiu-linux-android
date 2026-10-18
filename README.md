@@ -136,6 +136,15 @@ python3 bin/qyandroid super --root-mb 3072
 - `scripts/fetch-rootfs.sh` — 从包仓库拉取并解包根文件系统（完整 tar.xz、`--lanxiu` 或逐包 .qyp）
 - `scripts/qyextract.sh` — 解包单个 .qyp（解析 QYPKG 头 + 完整性校验）
 
+## 安卓 APK（内置 LANXIU）
+
+- **`lanxiu-aarch64-1.7.41.apk`**（约 95MB）：可直接安装的测试 APK，内置：
+  - aarch64 静态 proot 二进制
+  - r10 LANXIU rootfs（93MB xz，首次启动自动解压）
+  - 启动后自动以 `proot -0 -r <rootfs> /bin/bash` 运行，显示 id/uname/os-release
+- 包名：`com.lanxiu.android`；minSdk 24 / targetSdk 34；仅支持 arm64-v8a 设备
+- 用途：验证 LANXIU rootfs 在真实安卓设备 proot 环境下的行为（定位原 App 的 proot bug 是否为 App 侧问题）
+
 ## 下载
 
 - **proot Root 用户空间数据 ISO**：本仓库 Release → `lanxiu-aarch64-1.7.41.iso`（挂载后 `proot -0 -r <解压目录> /bin/bash` 使用）
