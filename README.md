@@ -57,7 +57,7 @@ proot -r ~/lanxiu-root -0 -b /dev -b /proc -b /sys /usr/bin/bash -l
 > - **服务管理**：`qysvc start|stop|restart|status|list`（setsid 守护 + pidfile + 日志），`qyinit` 监督 `sshd.unit`（`Restart=on-failure` 自动拉起）；
 > - 默认 SSH：`ssh root@<ip>`，密码 `lanxiu`；`/etc/ssh/sshd_config` 已配 `PermitRootLogin yes`、`UsePAM no`。
 >
-> **r14 GUI 环境补齐版（推荐）**：`lanxiu-aarch64-rootfs-20261018-r14.tar.xz`（**新 Release，tag `lanxiu-1.7.43-aarch64`**）
+> **r14 GUI 环境补齐版（推荐）**：`lanxiu-aarch64-rootfs-20261018-r14.tar.xz`（**新 Release，tag `lanxiu-1.7.43-aarch64`**），同版本 ISO：`lanxiu-aarch64-1.7.43.iso`
 > - **修复 `/bin/busybox` 缺失**：LANXIU 启动脚本依赖 `/bin/busybox`，原 rootfs 只建了 applet 符号链接漏了本体，导致 start-weston.sh 静默失败；已补
 > - **补 gdk-pixbuf loaders + 生成 loaders.cache**：GTK 图像加载（PNG/JPEG 内置 + bmp/gif/ico/tga/xpm 等 11 个模块）
 > - **补桌面壁纸** `/usr/share/backgrounds/lanxiu.png`（1280x800）、**补 Adwaita dnd 光标**、设置 XCURSOR_PATH/XCURSOR_THEME
