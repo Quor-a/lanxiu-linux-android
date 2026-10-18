@@ -57,7 +57,14 @@ proot -r ~/lanxiu-root -0 -b /dev -b /proc -b /sys /usr/bin/bash -l
 > - **服务管理**：`qysvc start|stop|restart|status|list`（setsid 守护 + pidfile + 日志），`qyinit` 监督 `sshd.unit`（`Restart=on-failure` 自动拉起）；
 > - 默认 SSH：`ssh root@<ip>`，密码 `lanxiu`；`/etc/ssh/sshd_config` 已配 `PermitRootLogin yes`、`UsePAM no`。
 >
-> **r12 shell+sudo 增强版（推荐）**：`lanxiu-aarch64-rootfs-20261018-r12.tar.xz`
+> **r13 完整开发工具版（推荐）**：`lanxiu-aarch64-rootfs-20261018-r13.tar.xz`（**新 Release，tag `lanxiu-1.7.42-aarch64`**）
+> - **Go 1.22.12**（官方 aarch64，`/usr/local/go/bin/go`、`gofmt`），实测 `go build` + 运行通过；
+> - **Rust 1.99.1**（官方 aarch64，`rustc`/`cargo`/`rustfmt`/`clippy`/`rust-analyzer` 在 `/var/cargo/bin`），已配置 `rust-lld` 链接器 + `/usr/lib` crt（`/etc/profile.d/devtools.sh` 和 `/var/cargo/config.toml`），实测 `cargo new` + `cargo build --offline` + 运行通过；
+> - **git 2.49.0** + node 22.14.0 + Python 3.13 + zsh/fish/dash + sudo 修复 + 内置静态 proot；
+> - **`/bin` 标准符号链接补齐**（`/bin/sh`→dash、`/bin/bash`→bash、401 个 busybox applet），`proot -0 -r <rootfs> /bin/bash` 开箱即用；sshd host key 权限修正（`sshd -t` OK）；
+> - 已预建安卓宿主路径（`/data/user/0/com.ai.assistance.quro/files`、`/storage/emulated/0`、`/sdcard`、`/data/local/tmp`），终端 exec 的 cwd 不再报 getcwd 错误。
+>
+> **r12 shell+sudo 增强版**：`lanxiu-aarch64-rootfs-20261018-r12.tar.xz`
 > - **更多 shell**：zsh 5.9、fish 3.7.0、dash 0.5.12（已入 `/etc/shells`，实测可运行），加上原 bash 5.3；
 > - **sudo 修复**：重编 sudo 1.9.17p1（`--without-pam --without-linux-audit`，`sudoers.so` 不再导出 `sudoers_audit` 符号），proot 下不再报 `sudoers_audit 插件初始化失败`；认证改为 shadow passwd；
 > - **内置静态 proot**：rootfs 内置 `/usr/local/bin/proot`（aarch64 全静态，无动态链接器依赖）。宿主 `/usr/local/bin/proot` 报 `not found`（动态链接器缺失）时，用 Release 里的 `lanxiu-aarch64-proot-static` 直接替换即可；
