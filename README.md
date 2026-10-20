@@ -57,7 +57,11 @@ proot -r ~/lanxiu-root -0 -b /dev -b /proc -b /sys /usr/bin/bash -l
 > - **服务管理**：`qysvc start|stop|restart|status|list`（setsid 守护 + pidfile + 日志），`qyinit` 监督 `sshd.unit`（`Restart=on-failure` 自动拉起）；
 > - 默认 SSH：`ssh root@<ip>`，密码 `lanxiu`；`/etc/ssh/sshd_config` 已配 `PermitRootLogin yes`、`UsePAM no`。
 >
-> **r15 缺失组件补齐版（推荐）**：`lanxiu-aarch64-rootfs-20261019-r15.tar.xz`（**新 Release，tag `lanxiu-1.7.44-aarch64`**），同版本 ISO：`lanxiu-aarch64-1.7.44.iso`
+> **r16 网络诊断工具补齐版（推荐）**：`lanxiu-aarch64-rootfs-20261019-r16.tar.xz`（**新 Release，tag `lanxiu-1.7.45-aarch64`**），同版本 ISO：`lanxiu-aarch64-1.7.45.iso`
+> - **ping/ping6**（iputils）、**dig/nslookup/host**（bind 9.18.39，实测解析正常）、**ip/ss**（iproute2）、**ifconfig/netstat/route/arp**（net-tools）、**traceroute**（实测可用）
+> - 实测 LANXIU 网络已通（curl 访问公网 HTTPS/DNS 正常），此版补齐全部网络诊断小工具
+>
+> **r15 缺失组件补齐版**：`lanxiu-aarch64-rootfs-20261019-r15.tar.xz`（tag `lanxiu-1.7.44-aarch64`）
 > - **tmux 3.4**（实测可用）、**wl-clipboard 2.2.1**（wl-copy/wl-paste，实测可用）
 > - **locale 命令 + locale-gen + localedef**（libc-bin/locales），**中文 locale zh_CN.UTF-8**（实测 `LANG=zh_CN.UTF-8` 生效）
 > - **自动登录 `/etc/qyautologin`**（root）
