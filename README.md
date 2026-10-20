@@ -57,7 +57,12 @@ proot -r ~/lanxiu-root -0 -b /dev -b /proc -b /sys /usr/bin/bash -l
 > - **服务管理**：`qysvc start|stop|restart|status|list`（setsid 守护 + pidfile + 日志），`qyinit` 监督 `sshd.unit`（`Restart=on-failure` 自动拉起）；
 > - 默认 SSH：`ssh root@<ip>`，密码 `lanxiu`；`/etc/ssh/sshd_config` 已配 `PermitRootLogin yes`、`UsePAM no`。
 >
-> **r16 网络诊断工具补齐版（推荐）**：`lanxiu-aarch64-rootfs-20261019-r16.tar.xz`（**新 Release，tag `lanxiu-1.7.45-aarch64`**），同版本 ISO：`lanxiu-aarch64-1.7.45.iso`
+> **r17 远程桌面 RDP 补齐版（推荐）**：`lanxiu-aarch64-rootfs-20261020-r17.tar.xz`（**新 Release，tag `lanxiu-1.7.46-aarch64`**），同版本 ISO：`lanxiu-aarch64-1.7.46.iso`
+> - **RDP 远程桌面服务**：weston 14.0.2 rdp-backend + FreeRDP 3.15.0，监听 **3389**；安卓端用微软远程桌面等 RDP 客户端连接 LANXIU 的 IP 即进入 LANXIU 桌面（qydesktop + desktop-shell + 壁纸）
+> - **开机自启**：`/etc/qyinit.d/rdp.unit` + `/usr/bin/start-rdp.sh`；**TLS 加密**（内置自签名证书）；**开关** `/etc/qyremotedesktop.conf`（`rdp=1` 开启 / `rdp=0` 关闭）
+> - 实测：qemu 下 RDP 服务常驻、3389 监听、qydesktop 随 RDP 会话运行
+>
+> **r16 网络诊断工具补齐版**：`lanxiu-aarch64-rootfs-20261019-r16.tar.xz`（tag `lanxiu-1.7.45-aarch64`），同版本 ISO：`lanxiu-aarch64-1.7.45.iso`
 > - **ping/ping6**（iputils）、**dig/nslookup/host**（bind 9.18.39，实测解析正常）、**ip/ss**（iproute2）、**ifconfig/netstat/route/arp**（net-tools）、**traceroute**（实测可用）
 > - 实测 LANXIU 网络已通（curl 访问公网 HTTPS/DNS 正常），此版补齐全部网络诊断小工具
 >
